@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>guiyq poluído</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: white;
+      font-family: Arial, sans-serif;
+      position: relative;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* Fundo poluído com guiyq */
+    .bg-polluted {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 400vw;
+      height: 400vh;
+      font-size: 14px;
+      line-height: 1.2;
+      color: rgba(0, 0, 0, 0.08);
+      white-space: pre;
+      font-weight: bold;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+      gap: 0;
+      width: 100vw;
+      min-height: 100vh;
+      padding-bottom: 100px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .cell {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: black;
+      font-size: 16px;
+      width: 100%;
+      aspect-ratio: 1 / 1;
+    }
+
+    .cell img {
+      width: 40px;
+      height: 40px;
+      object-fit: contain;
+      margin-top: 4px;
+    }
+
+    @media (max-width: 600px) {
+      .cell {
+        font-size: 14px;
+      }
+
+      .cell img {
+        width: 30px;
+        height: 30px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Fundo super poluído -->
+  <div class="bg-polluted" id="bg"></div>
+
+  <!-- Grade com texto e imagem -->
+  <div class="grid" id="grid"></div>
+
+  <script>
+    // Gerar fundo de texto poluído
+    const bg = document.getElementById("bg");
+    const repeated = "guiyq ".repeat(200);
+    let content = "";
+    for (let i = 0; i < 400; i++) {
+      content += repeated + "\n";
+    }
+    bg.textContent = content;
+
+    // Gerar grid de imagem + texto
+    const grid = document.getElementById("grid");
+
+    function fillGrid() {
+      const vw = window.innerWidth;
+      const vh = window.innerHeight;
+      const cellSize = 100;
+      const cols = Math.ceil(vw / cellSize);
+      const rows = Math.ceil(vh / cellSize) + 5;
+      const total = cols * rows;
+
+      grid.innerHTML = '';
+      for (let i = 0; i < total; i++) {
+        const div = document.createElement("div");
+        div.className = "cell";
+        div.innerHTML = 'guiyq<br><img src="guiyq.png" alt="guiyq">';
+        grid.appendChild(div);
+      }
+    }
+
+    fillGrid();
+    window.addEventListener('resize', fillGrid);
+  </script>
+
+</body>
+</html>
